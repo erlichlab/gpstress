@@ -1,0 +1,56 @@
+---
+title: "master"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## GenPop Stress main figures
+
+This is a master script for the main figures in R.
+
+```{r gpstress}
+# load decision-making trial data
+#load('../../data/gpstress_all_trials.RData')
+# load fits and stress data
+#load('../../data/gpstress.RData')
+# load R-squared for individual nc (DS) and dw (DW) fits
+#load('../../data/nc_real_r2.RData')
+#load('../../data/dw_real_r2.RData')
+# load fitted draws for example subject
+#load('../../data/gp_subj.RData')
+# load posteriors
+#load('../../data/nc_posterior.RData')
+#load('../../data/dw_posterior.RData')
+```
+
+## Fig. 2b
+
+```{r fig2b, echo=FALSE}
+source("gp_fig2bdsource.R")
+fig2bd(nc_posterior)
+```
+
+## Fig. 2d
+
+```{r fig2c, echo=FALSE}
+source("gp_fig2bdsource.R")
+fig2bd(dw_posterior)
+```
+
+## Fig. 3ac
+
+```{r fig3ac, echo=FALSE}
+source("fig3source.R")
+fig3(tetp,tptp,subj_te,subj_tp)
+```
+
+## Fig. 5ad
+
+```{r fig5ad, echo=FALSE}
+source("fig5source.R")
+fig5(followup)
+fig5(newgr)
+```
