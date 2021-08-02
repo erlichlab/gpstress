@@ -11,8 +11,14 @@ gp_fig2a()
 %% Fig 2 C
 gp_fig2c()
 
-%% Fig 3 D-F
-fig3df()
+%% Fig 3 A,B,C
+gp_fig3abc()
+
+%% Fig 3 D
+gp_fig3d()
+
+%% Fig 3 E
+gp_fig3e()
 
 %% Fig 4 A,B,D,E
 fig4abde()
