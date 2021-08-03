@@ -1,4 +1,4 @@
-# TP_posterior
+# GP_posterior
 
 # Setup -------
 
