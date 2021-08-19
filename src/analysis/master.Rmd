@@ -17,34 +17,53 @@ This is a master script for the main figures in R.
 # load fits and stress data
 #load('../../data/gpstress.RData')
 # load R-squared for individual nc (DS) and dw (DW) fits
-#load('../../data/nc_real_r2.RData')
+#load('../../data/ds_real_r2.RData')
 #load('../../data/dw_real_r2.RData')
 # load fitted draws for example subject
 #load('../../data/gp_subj.RData')
 # load posteriors
-#load('../../data/nc_posterior.RData')
+#load('../../data/ds_posterior.RData')
 #load('../../data/dw_posterior.RData')
+#load('../../data/risk_posterior.RData')
+#load('../../data/kapparisk_posterior.RData')
 ```
 
 ## Fig. 2b
 
 ```{r fig2b, echo=FALSE}
 source("gp_fig2bdsource.R")
-fig2bd(nc_posterior)
+fig2b(ds_posterior)
 ```
 
 ## Fig. 2d
 
-```{r fig2c, echo=FALSE}
+```{r fig2d, echo=FALSE}
 source("gp_fig2bdsource.R")
-fig2bd(dw_posterior)
+fig2d(dw_posterior)
 ```
 
-## Fig. 3ac
+## Subject's Plots Fig. 2ef, 4abc
 
-```{r fig3ac, echo=FALSE}
-source("fig3source.R")
-fig3(tetp,tptp,subj_te,subj_tp)
+```{r fig2ef4abc, echo=FALSE}
+source("figsubjfigsource.R")
+fig2e(naive_trials,newgr,nc_r2)
+fig2f(naive_trials,newgr,dw_r2)
+fig4abc(risk_r2)
+```
+
+## Fig. 4de
+
+```{r fig4de, echo=FALSE}
+source("gp_fig4desource.R")
+fig4d(risk_posterior)
+fig4e(kapparisk_posterior)
+```
+
+## Fig. 4f
+
+```{r fig4f, echo=FALSE}
+source("gp_fig4fsource.R")
+fig4f(ds_fits, risk_fits)
 ```
 
 ## Fig. 5ad
