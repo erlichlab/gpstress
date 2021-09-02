@@ -66,10 +66,44 @@ source("gp_fig4fsource.R")
 fig4f(ds_fits, risk_fits)
 ```
 
-## Fig. 5ad
+## Fig. 5a
 
-```{r fig5ad, echo=FALSE}
-source("fig5source.R")
-fig5(followup)
-fig5(newgr)
+```{r fig5a, echo=FALSE}
+source("gp_fig5asource.R")
+fig5a(dfjstr)
 ```
+
+## Fig. 5bc
+
+```{r fig5bc, echo=FALSE}
+source("gp_fig5bcsource.R")
+fig5bc(dfjstr,4)
+```
+
+## Fig. 6
+
+```{r fig6, echo=FALSE}
+source("gp_fig6source.R")
+fig6(mfstress) 
+```
+
+## Table 3, PCA angles
+
+```{r table3, echo=FALSE}
+source("gp_fig5bcsource.R")
+table3(dfjstr,1:2)
+table3(dfjstr,2:3)
+```
+
+## Table 4, Stress/params correlation
+
+```{r table4, echo=FALSE}
+source("gp_fig6source.R")
+stressfits_select = dplyr::select(stressfits,c(K_S,K_L,noise_S,r,tau,ls1,ls2,ls3,lh1,lh2,lh3,lds2,lds3,lds32,ldh2,ldh3,ldh32,lfs2,lfs3,lfs32,lfh2,lfh3,lfh32,pss,bepsi,lcu,ms,ts))
+strparres = table4(stressfits_select)
+strparres
+#strparres$P<0.05
+```
+
+
+
