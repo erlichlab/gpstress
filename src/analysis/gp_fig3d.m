@@ -1,16 +1,12 @@
 function gp_fig3d()
-% dbc can be removed after all subjects renamed and data stored in one .mat
-dbc = db.labdb.getConnection();
-dbc.use('jenya');
-% rs_bi
-qr = 'select * from stanfits_gp_delay_rs0_bi';
-params_dtb = dbc.query(qr);
+% file
+load('../../data/gpstress.mat');
 % prepare data
-params_a = table2array(params_dtb(:,:)); % followup group
-s_idx = find(strcmpi(params_dtb.Properties.VariableNames,'K_S'));
-se_idx = find(strcmpi(params_dtb.Properties.VariableNames,'K_S_sd'));
-l_idx = find(strcmpi(params_dtb.Properties.VariableNames,'K_L'));
-le_idx = find(strcmpi(params_dtb.Properties.VariableNames,'K_L_sd'));
+params_a = table2array(jfits(:,:)); % followup group
+s_idx = find(strcmpi(jfits.Properties.VariableNames,'K_S'));
+se_idx = find(strcmpi(jfits.Properties.VariableNames,'K_S_sd'));
+l_idx = find(strcmpi(jfits.Properties.VariableNames,'K_L'));
+le_idx = find(strcmpi(jfits.Properties.VariableNames,'K_L_sd'));
 x(:,1) = log(exp(params_a(:,s_idx))/86400);
 x(:,2) = params_a(:,se_idx);
 x(:,3) = x(:,2);
@@ -47,4 +43,4 @@ ylim([-10,4]);
 xlim([-10,4]);
 set(gcf,'PaperPosition',[0 0 5 4]);
 set(gcf, 'PaperSize', [5 4]);
-saveas(gcf, '~/Library/Mobile Documents/com~apple~CloudDocs/GP_Analysis/F3d_rs0.pdf')
+saveas(gcf, '../../figs/fig3d.pdf')

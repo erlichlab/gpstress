@@ -1,16 +1,12 @@
 function gp_fig2c()
-% dbc can be removed after all subjects renamed and data stored in one .mat
-dbc = db.labdb.getConnection();
-dbc.use('jenya');
-qr = 'select * from stanfits_gp_dw_rs0_bi';
-params_dtb = dbc.query(qr);
-%load('../../data/gpstress.mat');
+% file
+load('../../data/gpstress.mat');
 % prepare data
-params_a = table2array(params_dtb(:,:)); % followup group
-w_idx = find(strcmpi(params_dtb.Properties.VariableNames,'K_W'));
-we_idx = find(strcmpi(params_dtb.Properties.VariableNames,'K_W_sd'));
-l_idx = find(strcmpi(params_dtb.Properties.VariableNames,'K_L'));
-le_idx = find(strcmpi(params_dtb.Properties.VariableNames,'K_L_sd'));
+params_a = table2array(dwfits(:,:)); % followup group
+w_idx = find(strcmpi(dwfits.Properties.VariableNames,'K_W'));
+we_idx = find(strcmpi(dwfits.Properties.VariableNames,'K_W_sd'));
+l_idx = find(strcmpi(dwfits.Properties.VariableNames,'K_L'));
+le_idx = find(strcmpi(dwfits.Properties.VariableNames,'K_L_sd'));
 x(:,1) = log(exp(params_a(:,w_idx))*7);
 x(:,2) = params_a(:,we_idx);
 x(:,3) = x(:,2);
@@ -47,4 +43,4 @@ ylim([-10,4]);
 xlim([-10,4]);
 set(gcf,'PaperPosition',[0 0 5 4]);
 set(gcf, 'PaperSize', [5 4]);
-saveas(gcf, '~/Library/Mobile Documents/com~apple~CloudDocs/GP_Analysis/F2c_rs0.pdf')
+saveas(gcf, '../../figs/fig2c.pdf')

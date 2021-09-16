@@ -5,27 +5,32 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(Hmisc)
 ```
 
-## GenPop Stress main figures
+## GenPop Stress main figures & tables
 
-This is a master script for the main figures in R.
+This is a master script for the main figures and tables in R.
 
 ```{r gpstress}
 # load decision-making trial data
-#load('../../data/gpstress_all_trials.RData')
+load('../../data/gpstress_all_trials.RData')
 # load fits and stress data
-#load('../../data/gpstress.RData')
+load('../../data/gpfitsstress.RData')
 # load R-squared for individual nc (DS) and dw (DW) fits
-#load('../../data/ds_real_r2.RData')
-#load('../../data/dw_real_r2.RData')
+load('../../data/ds_r2.RData')
+load('../../data/dw_r2.RData')
+load('../../data/risk_r2.RData')
 # load fitted draws for example subject
-#load('../../data/gp_subj.RData')
+load('../../data/ds_subj.RData')
+load('../../data/dw_subj.RData')
+load('../../data/risk_subj.RData')
 # load posteriors
-#load('../../data/ds_posterior.RData')
-#load('../../data/dw_posterior.RData')
-#load('../../data/risk_posterior.RData')
-#load('../../data/kapparisk_posterior.RData')
+load('../../data/ds_posterior.RData')
+load('../../data/dw_posterior.RData')
+load('../../data/risk_posterior.RData')
+load('../../data/kapparisk_posterior.RData')
 ```
 
 ## Fig. 2b
@@ -42,13 +47,18 @@ source("gp_fig2bdsource.R")
 fig2d(dw_posterior)
 ```
 
-## Subject's Plots Fig. 2ef, 4abc
+## Subject's Plots Fig. 2ef, 4b (a and c are done similarly)
 
 ```{r fig2ef4abc, echo=FALSE}
-source("figsubjfigsource.R")
-fig2e(naive_trials,newgr,nc_r2)
-fig2f(naive_trials,newgr,dw_r2)
-fig4abc(risk_r2)
+source("gp_subjfigsource.R")
+ds_trials = genpop_trials %>% filter(sessid_5!=3) %>% droplevels()
+dw_trials = genpop_trials %>% filter(sessid_5!=1) %>% filter(sessid_5!=2) %>% droplevels()
+subjids <- c(14)
+fig2e(ds_trials,ds_fits,ds_r2)
+subjids <- c(40)
+fig2f(dw_trials,dw_fits,dw_r2)
+subjids <- c(16)
+fig4b(risk_trials,risk_fits,risk_r2)
 ```
 
 ## Fig. 4de
@@ -84,6 +94,7 @@ fig5bc(dfjstr,4)
 
 ```{r fig6, echo=FALSE}
 source("gp_fig6source.R")
+mfstress = merge.data.table (mf,dfjstr, by='subjid')
 fig6(mfstress) 
 ```
 
@@ -99,6 +110,8 @@ table3(dfjstr,2:3)
 
 ```{r table4, echo=FALSE}
 source("gp_fig6source.R")
+allfits = merge.data.table(ds_fits,risk_fits, by='subjid')
+stressfits = merge.data.table(dfjstr,allfits, by='subjid')
 stressfits_select = dplyr::select(stressfits,c(K_S,K_L,noise_S,r,tau,ls1,ls2,ls3,lh1,lh2,lh3,lds2,lds3,lds32,ldh2,ldh3,ldh32,lfs2,lfs3,lfs32,lfh2,lfh3,lfh32,pss,bepsi,lcu,ms,ts))
 strparres = table4(stressfits_select)
 strparres

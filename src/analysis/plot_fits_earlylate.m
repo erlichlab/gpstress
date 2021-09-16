@@ -4,14 +4,17 @@ earlyn = varargin{1};
     if treat == 'DS'
         treatment = {'L' 'S'};
         tid = 'LS';
+        treatlt = 'a';
         tnum = 1;
     elseif treat == 'DW'
         treatment = {'L' 'W'};
         tid = 'LW';
+        treatlt = 'b';
         tnum = 2;
     else
         treatment = {'L' 'S' 'W'};
         tid = 'LSW';
+        treatlt = 'c';
         tnum = 3;
     end
    
@@ -92,7 +95,7 @@ legend boxoff                   % Hides the legend's axes
 ylabel(ax, 'P(later)');
 xlabel(ax, 'U(later) - U(sooner)');
 set(ax,'FontSize',16);
-fsave = sprintf('~/Library/Mobile Documents/com~apple~CloudDocs/GP_Analysis/F3_matlab_%s_%d_rs0.pdf',treat,earlyn);
+fsave = sprintf('../../figs/fig3%s.pdf',treatlt);
 outpos = get(gca,'OuterPosition');
 set(gca,'OuterPosition',[outpos(1) outpos(2) + 0.005 outpos(3) outpos(4)])
 set(gcf,'PaperPosition',[0 0 3 5]);
@@ -179,7 +182,7 @@ legend boxoff                   % Hides the legend's axes
 ylabel(ax, 'P(later)');
 xlabel(ax, 'U(later) - U(sooner)');
 set(ax,'FontSize',16);
-fsave = sprintf('~/Library/Mobile Documents/com~apple~CloudDocs/GP_Analysis/F3_matlab_%s_%d_early_rs0.pdf',treat,earlyn);
+fsave = sprintf('../../figs/fig3%s_early.pdf',treatlt);
 outpos = get(gca,'OuterPosition');
 set(gca,'OuterPosition',[outpos(1) outpos(2) + 0.005 outpos(3) outpos(4)])
 set(gcf,'PaperPosition',[0 0 3 5]);

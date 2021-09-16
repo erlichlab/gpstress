@@ -6,6 +6,7 @@ library(bayesplot)
 library(brms)
 #library(ggthemes)
 library(ggplot2)
+require(latex2exp)
 
 plot_each = function(x, xl){
   p = mcmc_areas(x, prob=.8, prob_outer = 0.9999, point_est = 'mean') +  

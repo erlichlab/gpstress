@@ -3,6 +3,9 @@
 # Setup -------
 library(ggplot2)
 library(data.table)
+require(latex2exp)
+library(viridis)
+library(RColorBrewer)
 
 fig4f = function(ds_fits,risk_fits){
   ds_fits$K_S = log(exp(ds_fits$K_S)/86400) # change units to be comparable
