@@ -14,4 +14,4 @@ The data folder contains anonymized choice and stress data from our subjects.
 
 figs
 
-The figures folder contains high quality PDFs of the individual delay discounting fits and the individual timing figures (Figure S1 and Figure S2, respectively). Also, if you run the src/analysis/master.m script it will put figures in this folder.
+The figures folder contains high quality PDFs of the individual delay discounting fits (DS and DW sessions) and the individual risk fits (figures S2-S4). Also, if you run the src/analysis/master.m script (and master.Rmd after uncommenting) it will put figures in this folder.
