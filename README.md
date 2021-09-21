@@ -2,7 +2,12 @@
 
 Our study on impacts of stress on decision making.
 
-To cite this work: 
+To cite this work: Does endogenous variation in stress modulate risk and time preferences?
+Evgeniya Lukinova, Jeffrey C Erlich
+bioRxiv 2021.09.18.460891; doi: https://doi.org/10.1101/2021.09.18.460891
+
+Code and Data:
+[![DOI](https://zenodo.org/badge/385504346.svg)](https://zenodo.org/badge/latestdoi/385504346)
 
 src
 
