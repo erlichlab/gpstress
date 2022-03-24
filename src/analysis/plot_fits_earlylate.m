@@ -21,7 +21,7 @@ earlyn = varargin{1};
 % all trials
 figure(1); clf;
 ax = draw.jaxes
-cl1 = colormap(parula(6));
+cl1 = colormap(parula(10));
 hold on;
 for tx3=1:numel(treatment)
     noisetxt = sprintf('noise_%s',treatment{tx3});
@@ -49,7 +49,7 @@ for tx3=1:numel(treatment)
     [bx,by,be]=stats.binned(xhat, choice==1, 'n_bins', 10); % Jeff prefers stats.binned
     if tx3<=2
         if tnum ~=2
-            h1 = draw.errorplot(ax,bx,by,be,'Color',(cl1(2*tx3,:)));
+            h1 = draw.errorplot(ax,bx,by,be,'Color',(cl1(2*tx3-1,:)));
         else
             if tx3==1
                 h1 = draw.errorplot(ax,bx,by,be,'Color',(cl1(2*tx3,:)));
@@ -64,11 +64,11 @@ for tx3=1:numel(treatment)
     xfit = -6:0.1:6;  
     yfit = glmval(gB, xfit, 'probit');
     if tx3==1
-        h3 = plot(ax,xfit,yfit,'Color',(cl1(2*tx3,:)),'LineWidth',2,'LineStyle','--');
+        h3 = plot(ax,xfit,yfit,'Color',(cl1(2*tx3-1,:)),'LineWidth',2,'LineStyle','--');
         treatment1 = treatment{tx3};
     else
         if numel(treatment)==2 && tnum ~=2
-                h4 = plot(ax,xfit,yfit,'Color',(cl1(2*tx3,:)),'LineWidth',2,'LineStyle','-.');
+                h4 = plot(ax,xfit,yfit,'Color',(cl1(2*tx3-1,:)),'LineWidth',2,'LineStyle','-.');
         
         elseif numel(treatment)==2 && tnum ==2
                 h4 = plot(ax,xfit,yfit,'Color',(cl1(3*tx3-1,:)),'LineWidth',2,'LineStyle','-.');
@@ -95,19 +95,19 @@ legend boxoff                   % Hides the legend's axes
 ylabel(ax, 'P(later)');
 xlabel(ax, 'U(later) - U(sooner)');
 set(ax,'FontSize',16);
-fsave = sprintf('../../figs/fig3%s.pdf',treatlt);
+fsave = sprintf('../../figs/fig2d.pdf',treatlt);
 outpos = get(gca,'OuterPosition');
 set(gca,'OuterPosition',[outpos(1) outpos(2) + 0.005 outpos(3) outpos(4)])
-set(gcf,'PaperPosition',[0 0 3 5]);
+set(gcf,'PaperPosition',[0 0 3 4]);
 %set(gcf,'PaperPosition',[0 0 5 4]);
-set(gcf, 'PaperSize', [3 5]);
+set(gcf, 'PaperSize', [3 4]);
 %set(gcf, 'PaperSize', [5 4]);
 saveas(gcf, fsave,'pdf')
 
 % early
 figure(2); clf;
 ax = draw.jaxes;
-cl1 = colormap(parula(6));
+cl1 = colormap(parula(10));
 hold on;
 for tx3=1:numel(treatment)
     noisetxt = sprintf('noise_%s',treatment{tx3});
@@ -136,7 +136,7 @@ for tx3=1:numel(treatment)
     [bx,by,be]=stats.binned(xhat, choice==1, 'n_bins', 10); % Jeff prefers stats.binned
     if tx3<=2
         if tnum ~=2
-            h1 = draw.errorplot(ax,bx,by,be,'Color',(cl1(2*tx3,:)));
+            h1 = draw.errorplot(ax,bx,by,be,'Color',(cl1(2*tx3-1,:)));
         else
             if tx3==1
                 h1 = draw.errorplot(ax,bx,by,be,'Color',(cl1(2*tx3,:)));
@@ -151,11 +151,11 @@ for tx3=1:numel(treatment)
     xfit = -6:0.1:6;  
     yfit = glmval(gB, xfit, 'probit');
     if tx3==1
-        h3 = plot(ax,xfit,yfit,'Color',(cl1(2*tx3,:)),'LineWidth',2,'LineStyle','--');
+        h3 = plot(ax,xfit,yfit,'Color',(cl1(2*tx3-1,:)),'LineWidth',2,'LineStyle','--');
         treatment1 = treatment{tx3};
     else
         if numel(treatment)==2 && tnum ~=2
-                h4 = plot(ax,xfit,yfit,'Color',(cl1(2*tx3,:)),'LineWidth',2,'LineStyle','-.');
+                h4 = plot(ax,xfit,yfit,'Color',(cl1(2*tx3-1,:)),'LineWidth',2,'LineStyle','-.');
         
         elseif numel(treatment)==2 && tnum ==2
                 h4 = plot(ax,xfit,yfit,'Color',(cl1(3*tx3-1,:)),'LineWidth',2,'LineStyle','-.');
@@ -182,11 +182,11 @@ legend boxoff                   % Hides the legend's axes
 ylabel(ax, 'P(later)');
 xlabel(ax, 'U(later) - U(sooner)');
 set(ax,'FontSize',16);
-fsave = sprintf('../../figs/fig3%s_early.pdf',treatlt);
+fsave = sprintf('../../figs/fig2d_early.pdf',treatlt);
 outpos = get(gca,'OuterPosition');
 set(gca,'OuterPosition',[outpos(1) outpos(2) + 0.005 outpos(3) outpos(4)])
-set(gcf,'PaperPosition',[0 0 3 5]);
+set(gcf,'PaperPosition',[0 0 3 4]);
 %set(gcf,'PaperPosition',[0 0 5 4]);
-set(gcf, 'PaperSize', [3 5]);
+set(gcf, 'PaperSize', [3 4]);
 %set(gcf, 'PaperSize', [5 4]);
 saveas(gcf, fsave,'pdf')

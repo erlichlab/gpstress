@@ -5,17 +5,11 @@
 
 addpath elutils; % This adds the helper functions that are used for the figures.
 
-%% Fig 2 A
-gp_fig2a()
+%% Fig 2 D
+gp_fig2d()
 
-%% Fig 2 C
-gp_fig2c()
+%% Fig 2 E left
+gp_fig2el()
 
-%% Fig 3 A,B,C
-gp_fig3abc()
-
-%% Fig 3 D
-gp_fig3d()
-
-%% Fig 3 E
-gp_fig3e()
+%% Fig 2 E right
+gp_fig2er()
