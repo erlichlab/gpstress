@@ -126,7 +126,7 @@ return(q)
 
 #-----
 
-fig2e = function(ds_trials,fits,ds_r2){
+fig2a = function(ds_trials,fits,ds_r2){
   these_fits = fits %>% filter(subjid == 14)
   breaksL <- c(2,6,13,29,62,65)
   breaksS <- c(2/86400,6/86400,13/86400,29/86400,62/86400,65/86400)
@@ -145,7 +145,7 @@ fig2e = function(ds_trials,fits,ds_r2){
   return(p)
 }
 
-fig2f = function(dw_trials,fits,dw_r2){
+fig2b = function(dw_trials,fits,dw_r2){
   these_fits = fits %>% filter(subjid == 40)
   # bin delays ahead of time
   # set up cut-off values
@@ -166,7 +166,7 @@ fig2f = function(dw_trials,fits,dw_r2){
   return(p)
 }
 
-fig4b = function(risk_trials,fits,risk_r2){
+fig2c = function(risk_trials,fits,risk_r2){
   these_fits = fits %>% filter(subjid == 16)
   these_trials = risk_trials %>% filter(subjid == 16)
   p = plot_subject_risk(1,these_fits,these_trials)

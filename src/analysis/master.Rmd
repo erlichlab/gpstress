@@ -33,90 +33,102 @@ load('../../data/risk_posterior.RData')
 load('../../data/kapparisk_posterior.RData')
 ```
 
-## Fig. 2b
+## Subject's Plots Fig. 2abc
 
-```{r fig2b, echo=FALSE}
-source("gp_fig2bdsource.R")
-fig2b(ds_posterior)
-```
-
-## Fig. 2d
-
-```{r fig2d, echo=FALSE}
-source("gp_fig2bdsource.R")
-fig2d(dw_posterior)
-```
-
-## Subject's Plots Fig. 2ef, 4b (a and c are done similarly)
-
-```{r fig2ef4abc, echo=FALSE}
+```{r fig2abc, echo=FALSE}
 source("gp_subjfigsource.R")
 ds_trials = genpop_trials %>% filter(sessid_5!=3) %>% droplevels()
 dw_trials = genpop_trials %>% filter(sessid_5!=1) %>% filter(sessid_5!=2) %>% droplevels()
 subjids <- c(14)
-fig2e(ds_trials,ds_fits,ds_r2)
+fig2a(ds_trials,ds_fits,ds_r2)
 subjids <- c(40)
-fig2f(dw_trials,dw_fits,dw_r2)
+fig2b(dw_trials,dw_fits,dw_r2)
 subjids <- c(16)
-fig4b(risk_trials,risk_fits,risk_r2)
+fig2c(risk_trials,risk_fits,risk_r2)
 ```
 
-## Fig. 4de
+## Fig. 2f
 
-```{r fig4de, echo=FALSE}
-source("gp_fig4desource.R")
-fig4d(risk_posterior)
-fig4e(kapparisk_posterior)
+```{r fig2f, echo=FALSE}
+source("gp_fig2fsource.R")
+fig2f(ds_fits, risk_fits)
 ```
 
-## Fig. 4f
+## Fig. 3a
 
-```{r fig4f, echo=FALSE}
-source("gp_fig4fsource.R")
-fig4f(ds_fits, risk_fits)
+```{r fig3a, echo=FALSE}
+source("gp_fig3asource.R")
+fig3a(dfjstr)
 ```
 
-## Fig. 5a
+## Fig. 3bc
 
-```{r fig5a, echo=FALSE}
-source("gp_fig5asource.R")
-fig5a(dfjstr)
+```{r fig3bc, echo=FALSE}
+source("gp_fig3bcsource.R")
+fig3bc(dfjstr,4)
 ```
 
-## Fig. 5bc
+## Fig. 3c, table insert based on the figure
 
-```{r fig5bc, echo=FALSE}
-source("gp_fig5bcsource.R")
-fig5bc(dfjstr,4)
-```
-
-## Fig. 6
-
-```{r fig6, echo=FALSE}
-source("gp_fig6source.R")
-mfstress = merge.data.table (mf,dfjstr, by='subjid')
-fig6(mfstress) 
+```{r fig3bci, echo=FALSE}
+source("gp_fig3bcsource.R")
+# four largest loadings (from bottom to top) per PC
+loads = pca_loads(dfjstr,4)
+plot_pc4(loads)
 ```
 
 ## Table 3, PCA angles
 
 ```{r table3, echo=FALSE}
-source("gp_fig5bcsource.R")
-table3(dfjstr,1:2)
-table3(dfjstr,2:3)
+source("gp_fig3bcsource.R")
+table2(dfjstr,1:2)
+table2(dfjstr,2:3)
+```
+## SI
+
+## Fig. S5a
+
+```{r figS5a, echo=FALSE}
+source("gp_figS5absource.R")
+figS5a(ds_posterior)
 ```
 
-## Table 4, Stress/params correlation
+## Fig. S5b
+
+```{r figS5b, echo=FALSE}
+source("gp_figS5absource.R")
+figS5b(dw_posterior)
+```
+
+
+## Fig. S5cd
+
+```{r figS5cd, echo=FALSE}
+source("gp_figS5cdsource.R")
+figS5c(risk_posterior)
+figS5d(kapparisk_posterior)
+```
+
+
+## Table S4, Stress/params correlation
 
 ```{r table4, echo=FALSE}
-source("gp_fig6source.R")
-allfits = merge.data.table(ds_fits,risk_fits, by='subjid')
-stressfits = merge.data.table(dfjstr,allfits, by='subjid')
-stressfits_select = dplyr::select(stressfits,c(K_S,K_L,noise_S,r,tau,ls1,ls2,ls3,lh1,lh2,lh3,lds2,lds3,lds32,ldh2,ldh3,ldh32,lfs2,lfs3,lfs32,lfh2,lfh3,lfh32,pss,bepsi,lcu,ms,ts))
-strparres = table4(stressfits_select)
-strparres
-#strparres$P<0.05
+source("gp_tabS4source.R")
+delay_fits = left_join(ds_fits,ds12_fits,by = "subjid")
+allfits = merge(delay_fits,risk_fits, by='subjid')
+mbmf = merge(allfits,mf, by='subjid')
+mbmfstr = merge(mbmf, dfjstr, by = "subjid")
+mbmfstr$K_S21 = mbmfstr$K_S.y-mbmfstr$K_S.x
+mbmfstr$PL_S21 = mbmfstr$PL_S2-mbmfstr$PL_S1
+mbmft = dplyr::select(mbmfstr,c(K_S21, PL_S21,K_S, PL_S, tau, ls1,ls2,ls3,lds2,lds3,lds32,lfs2,lfs3,lfs32,lh1,lh2,lh3,ldh2,ldh3,ldh32,lfh2,lfh3,lfh32,pss,bepsi,lcu,ms,ts,PC1,PC2,PC3,PC4))
+# with outlier
+resmbmft = table4(mbmft)
+resmbmft
+#resmbmft$P<0.05
+# without outlier
+mbmftX = mbmft[mbmft$tau<6,]
+resmbmftX = table4(mbmftX)
+resmbmftX
+#resmbmftX$P<0.05
 ```
-
-
 
