@@ -2,6 +2,7 @@
 
 Our study on impacts of stress on decision making.
 
+
 To cite this work: 
 
 Does endogenous variation in stress modulate risk and time preferences?
