@@ -23,19 +23,23 @@ bino = function(x){
 plot_subject_ds = function(sind,fits,these_trials){
   sr = ds_r2 %>% filter(subjid==subjids[sind], unit=='1') %>% select(r2) %>% as.double()
   lr = ds_r2 %>% filter(subjid==subjids[sind], unit=='0') %>% select(r2) %>% as.double()
-  fitstr1 = sprintf('log(k)\\[SV,LV\\]=\\[$%.1f, %.1f$\\]',
+  fitstr1 = sprintf('log(k)\\[SDD,DDD\\]=\\[$%.1f, %.1f$\\]',
                     log((exp(fits$K_S[sind]))/86400), fits$K_L[sind])
-  fitstr2= sprintf('log($\\tau$)\\[SV,LV\\]=\\[$%.1f, %.1f$\\]',
+  fitstr2= sprintf('log($\\tau$)\\[SDD,DDD\\]=\\[$%.1f, %.1f$\\]',
                    fits$noise_S[sind],fits$noise_L[sind])
-  fitstr3= sprintf('rews\\[SV,LV\\]=\\[$%.1f, %.1f$\\]',
+  fitstr3= sprintf('rews\\[SDD,DDD\\]=\\[$%.1f, %.1f$\\]',
                    fits$rews_S[sind],fits$rews_L[sind])
-  fitstr4 =  sprintf('$r^2$\\[SV,LV\\]=\\[$%0.2f,%0.2f$\\]', sr, lr)
+  fitstr4 =  sprintf('$r^2$\\[SDD,DDD\\]=\\[$%0.2f,%0.2f$\\]', sr, lr)
+  unit_names <- as_labeller(
+    c('SV'="SDD",'LV'="DDD",
+    '3'='3','6.5'='6.5','14'='14','30'='30','64'='64')
+  )
   p = ds.subj %>%
     ggplot(aes(x = rewmag, y = .value/n_trials, color = ordered(delaybin), fill = ordered(delaybin))) + 
-    facet_grid(unit ~ delaybin, labeller = labeller(.multi_line = FALSE), drop=TRUE) +
+    facet_grid(unit ~ delaybin, labeller = unit_names, drop=TRUE) +
     stat_lineribbon(aes(y = .value/n_trials), .width = c(.99, .80, .50), alpha = 1/4, size = 0.1) + 
     stat_summary_bin(aes(y = .value), bins = 4, size = .05, fun.data = bino, data = these_trials %>% mutate(.value=choice) ) +
-    labs(y='P(Chose Later)', x='Reward Magnitude', color='Delay') + 
+    labs(y='P(Delayed Option)', x='Reward Magnitude', color='Delay') + 
     guides(fill='none', color='none') +
     scale_y_continuous(breaks=c(0,0.5,1)) +
     scale_x_continuous(breaks = c(0,5,10)) +
@@ -49,28 +53,32 @@ plot_subject_ds = function(sind,fits,these_trials){
     draw_label(TeX(fitstr1), x = 0.05,y = 0.98, hjust = 0, vjust = 1,size=6) +
     draw_label(TeX(fitstr2), x = 0.05,y = 0.94, hjust = 0, vjust = 1,size=6) +
     draw_label(TeX(fitstr3), x = 0.05,y = 0.90, hjust = 0, vjust = 1,size=6) +
-    draw_label(TeX(fitstr4), x = 0.5,y = 0.98, hjust = 0, vjust = 1,size=6)
+    draw_label(TeX(fitstr4), x = 0.55,y = 0.94, hjust = 0, vjust = 1,size=6)
   
-  #ggsave(paste0('../../figs/subj_figs/','ds_',sind,'.pdf'),plot=q, units = 'in', width=2.5, height =2.5)
+  ggsave(paste0('../../figs/ds.pdf'),plot=q, units = 'in', width=2.5, height =2.5)
   return(q)
 }
 
 plot_subject_dw = function(sind,fits,these_trials){
 wr = dw_r2 %>% filter(subjid==subjids[sind], unit=='2') %>% select(r2) %>% as.double()
 dr = dw_r2 %>% filter(subjid==subjids[sind], unit=='0') %>% select(r2) %>% as.double()
-fitstr1 = sprintf('log(k)\\[WV,DV\\]=\\[$%.1f, %.1f$\\]',
+fitstr1 = sprintf('log(k)\\[WDD,DDD\\]=\\[$%.1f, %.1f$\\]',
                   log((exp(fits$K_W[sind]))*7), fits$K_L[sind])
-fitstr2= sprintf('log($\\tau$)\\[WV,DV\\]=\\[$%.1f, %.1f$\\]',
+fitstr2= sprintf('log($\\tau$)\\[WDD,DDD\\]=\\[$%.1f, %.1f$\\]',
                  fits$noise_W[sind],fits$noise_L[sind])
-fitstr3= sprintf('rews\\[WV,DV\\]=\\[$%.1f, %.1f$\\]',
+fitstr3= sprintf('rews\\[WDD,DDD\\]=\\[$%.1f, %.1f$\\]',
                  fits$rews_W[sind],fits$rews_L[sind])
-fitstr4 =  sprintf('$r^2$\\[WV,DV\\]=\\[$%0.2f,%0.2f$\\]', wr, dr)
+fitstr4 =  sprintf('$r^2$\\[WDD,DDD\\]=\\[$%0.2f,%0.2f$\\]', wr, dr)
+unit_names_dw <- as_labeller(
+  c('DV'="DDD",'WV'="WDD",
+    '1'='1','3'='3','7'='7','14'='14','28'='28','35'='35','64'='64')
+)
 p=dw.subj %>%  
   ggplot(aes(x = rewmag, y = .value/n_trials, color = ordered(delaybin), fill = ordered(delaybin))) + 
-  facet_grid(unit~delaybin, labeller = labeller(.multi_line = FALSE), drop=TRUE) +
+  facet_grid(unit~delaybin, labeller = unit_names_dw, drop=TRUE) +
   stat_lineribbon(aes(y = .value/n_trials), .width = c(.99, .80, .50), alpha = 1/4, size = 0.1) + 
   stat_summary_bin(aes(y = .value), bins = 4, size = .05, fun.data = bino, data = these_trials %>% mutate(.value=choice)) +
-  labs(y='P(Chose Later)', x='Reward Magnitude', color='Delay') + #, title=TeX(fitstr1), subtitle = TeX(fitstr2)) +
+  labs(y='P(Delayed Option)', x='Reward Magnitude', color='Delay') + #, title=TeX(fitstr1), subtitle = TeX(fitstr2)) +
   guides(fill='none', color='none') +
   scale_y_continuous(breaks=c(0,0.5,1)) +
   scale_x_continuous(breaks = c(0,5,10)) +
@@ -84,8 +92,8 @@ q = ggdraw(p) +
   draw_label(TeX(fitstr1), x = 0.05,y = 0.98, hjust = 0, vjust = 1,size=6) +
   draw_label(TeX(fitstr2), x = 0.05,y = 0.94, hjust = 0, vjust = 1,size=6) +
   draw_label(TeX(fitstr3), x = 0.05,y = 0.90, hjust = 0, vjust = 1,size=6) +
-  draw_label(TeX(fitstr4), x = 0.5,y = 0.98, hjust = 0, vjust = 1,size=6)
-#ggsave(paste0('../../figs/subj_figs/','dw_',sind,'.pdf'),plot=q, units = 'in', width=2.5, height =2.5)
+  draw_label(TeX(fitstr4), x = 0.55,y = 0.94, hjust = 0, vjust = 1,size=6)
+ggsave(paste0('../../figs/','dw.pdf'),plot=q, units = 'in', width=2.5, height =2.5)
 return(q)
 }
 
@@ -126,7 +134,7 @@ return(q)
 
 #-----
 
-fig2a = function(ds_trials,fits,ds_r2){
+fig2b = function(ds_trials,fits,ds_r2){
   these_fits = fits %>% filter(subjid == 14)
   breaksL <- c(2,6,13,29,62,65)
   breaksS <- c(2/86400,6/86400,13/86400,29/86400,62/86400,65/86400)
@@ -145,7 +153,7 @@ fig2a = function(ds_trials,fits,ds_r2){
   return(p)
 }
 
-fig2b = function(dw_trials,fits,dw_r2){
+fig_dw = function(dw_trials,fits,dw_r2){
   these_fits = fits %>% filter(subjid == 40)
   # bin delays ahead of time
   # set up cut-off values
@@ -166,7 +174,7 @@ fig2b = function(dw_trials,fits,dw_r2){
   return(p)
 }
 
-fig2c = function(risk_trials,fits,risk_r2){
+fig_risk = function(risk_trials,fits,risk_r2){
   these_fits = fits %>% filter(subjid == 16)
   these_trials = risk_trials %>% filter(subjid == 16)
   p = plot_subject_risk(1,these_fits,these_trials)

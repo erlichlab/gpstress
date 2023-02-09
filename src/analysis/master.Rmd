@@ -33,18 +33,14 @@ load('../../data/risk_posterior.RData')
 load('../../data/kapparisk_posterior.RData')
 ```
 
-## Subject's Plots Fig. 2abc
+## Subject's Plots Fig. 2bc
 
 ```{r fig2abc, echo=FALSE}
 source("gp_subjfigsource.R")
 ds_trials = genpop_trials %>% filter(sessid_5!=3) %>% droplevels()
 dw_trials = genpop_trials %>% filter(sessid_5!=1) %>% filter(sessid_5!=2) %>% droplevels()
 subjids <- c(14)
-fig2a(ds_trials,ds_fits,ds_r2)
-subjids <- c(40)
-fig2b(dw_trials,dw_fits,dw_r2)
-subjids <- c(16)
-fig2c(risk_trials,risk_fits,risk_r2)
+fig2b(ds_trials,ds_fits,ds_r2)
 ```
 
 ## Fig. 2f
