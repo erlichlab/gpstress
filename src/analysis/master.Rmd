@@ -33,7 +33,7 @@ load('../../data/risk_posterior.RData')
 load('../../data/kapparisk_posterior.RData')
 ```
 
-## Subject's Plots Fig. 2bc
+## Subject's Plots Fig. 2b
 
 ```{r fig2abc, echo=FALSE}
 source("gp_subjfigsource.R")
@@ -43,18 +43,11 @@ subjids <- c(14)
 fig2b(ds_trials,ds_fits,ds_r2)
 ```
 
-## Fig. 2f
+## Fig. 3b
 
-```{r fig2f, echo=FALSE}
-source("gp_fig2fsource.R")
-fig2f(ds_fits, risk_fits)
-```
-
-## Fig. 3a
-
-```{r fig3a, echo=FALSE}
-source("gp_fig3asource.R")
-fig3a(dfjstr)
+```{r fig3b, echo=FALSE}
+source("gp_fig3bsource.R")
+fig3b(dfjstr)
 ```
 
 ## Fig. 3bc
