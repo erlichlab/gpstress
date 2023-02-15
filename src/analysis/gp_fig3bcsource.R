@@ -9,7 +9,7 @@ library(RColorBrewer)
 library(ggpubr)
 
 fig3bc = function(data,x1){
-  data1 = dplyr::select(data,c(ls1,ls2,ls3,lh1,lh2,lh3,pss,bepsi,lcu,sex,ms,ts))
+  data1 = dplyr::select(data,c(ls1,ls2,ls3,lh1,lh2,lh3,pss,bepsi,lcu,sex))
   dataX = na.omit(data1)
   gr <- factor(dataX$sex)
   dataX <- subset(dataX, select = -c(sex))
@@ -71,7 +71,7 @@ table2 = function(data,choices) {
 }
 
 pca_loads = function(data,choices) {
-  data1 = dplyr::select(data,c(ls1,ls2,ls3,lh1,lh2,lh3,pss,bepsi,lcu,sex,ms,ts))
+  data1 = dplyr::select(data,c(ls1,ls2,ls3,lh1,lh2,lh3,pss,bepsi,lcu,sex))
   dataX = na.omit(data1)
   gr <- factor(dataX$sex)
   dataX <- subset(dataX, select = -c(sex))
