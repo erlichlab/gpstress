@@ -50,6 +50,14 @@ source("gp_fig3bsource.R")
 fig3b(dfjstr)
 ```
 
+## Stress Behavior Correlation Plot
+
+```{r corrstressbehavior, echo=FALSE}
+source("gp_stressbehavior_cor.R")
+corpl_bs(ds_fits, ds12_fits, dw_fits, mf, dfjstr)
+corpl_ws(ds_fits, ds12_fits, dw_fits, mf, dfjstr)
+```
+
 ## Fig. 3bc
 
 ```{r fig3bc, echo=FALSE}
