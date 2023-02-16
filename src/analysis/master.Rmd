@@ -50,12 +50,21 @@ source("gp_fig3bsource.R")
 fig3b(dfjstr)
 ```
 
-## Stress Behavior Correlation Plot
+## Stress Behavior Correlation Analysis
 
 ```{r corrstressbehavior, echo=FALSE}
 source("gp_stressbehavior_cor.R")
 corpl_bs(ds_fits, ds12_fits, dw_fits, mf, dfjstr)
 corpl_ws(ds_fits, ds12_fits, dw_fits, mf, dfjstr)
+
+# Print significant correlations
+bs_sigcor(ds_fits, ds12_fits, dw_fits, mf, dfjstr)
+# after Bonferroni (0.05/13)
+# K_S.x PC2	0.523458641394442	0.00148882999936909
+# PL_S1 PC2	-0.518484035051397	0.00168171266321913
+ws_sigcor(ds_fits, ds12_fits, dw_fits, mf, dfjstr)
+# after Bonferroni (0.05/6)
+# PL_Sd2 ldh3	-0.486201011034419	0.00264282957402134
 ```
 
 ## Fig. 3bc
