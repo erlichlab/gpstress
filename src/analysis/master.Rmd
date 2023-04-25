@@ -54,7 +54,9 @@ fig3b(dfjstr)
 
 ```{r corrstressbehavior, echo=FALSE}
 source("gp_stressbehavior_cor.R")
+# between-subject
 corpl_bs(ds_fits, ds12_fits, dw_fits, mf, dfjstr)
+# within-subject
 corpl_ws(ds_fits, ds12_fits, dw_fits, mf, dfjstr)
 
 # Print significant correlations
@@ -67,58 +69,50 @@ ws_sigcor(ds_fits, ds12_fits, dw_fits, mf, dfjstr)
 # PL_Sd2 ldh3	-0.486201011034419	0.00264282957402134
 ```
 
-## Fig. 3bc
+## SI
 
-```{r fig3bc, echo=FALSE}
-source("gp_fig3bcsource.R")
-fig3bc(dfjstr,4)
+## Fig. S4a
+
+```{r figS4a, echo=FALSE}
+source("gp_figS4absource.R")
+figS4a(ds_posterior)
 ```
 
-## Fig. 3c, table insert based on the figure
+## Fig. S4b
 
-```{r fig3bci, echo=FALSE}
-source("gp_fig3bcsource.R")
+```{r figS4b, echo=FALSE}
+source("gp_figS4absource.R")
+figS4b(dw_posterior)
+```
+
+
+## Fig. S6
+
+```{r figs6, echo=FALSE}
+source("gp_figS6source.R")
+figs6(dfjstr,4)
+```
+
+## Fig. S6 c, table insert based on the figure
+
+```{r figs6i, echo=FALSE}
+source("gp_figS6source.R")
 # four largest loadings (from bottom to top) per PC
 loads = pca_loads(dfjstr,4)
 plot_pc4(loads)
 ```
 
-## Table 3, PCA angles
+## Table S4, PCA angles
 
-```{r table3, echo=FALSE}
-source("gp_fig3bcsource.R")
+```{r tables4, echo=FALSE}
+source("gp_figS6source.R")
 table2(dfjstr,1:2)
 table2(dfjstr,2:3)
 ```
-## SI
 
-## Fig. S5a
+## Table S5, within-subject correlation
 
-```{r figS5a, echo=FALSE}
-source("gp_figS5absource.R")
-figS5a(ds_posterior)
-```
-
-## Fig. S5b
-
-```{r figS5b, echo=FALSE}
-source("gp_figS5absource.R")
-figS5b(dw_posterior)
-```
-
-
-## Fig. S5cd
-
-```{r figS5cd, echo=FALSE}
-source("gp_figS5cdsource.R")
-figS5c(risk_posterior)
-figS5d(kapparisk_posterior)
-```
-
-
-## Table S4, Stress/params correlation
-
-```{r table4, echo=FALSE}
+```{r tables5, echo=FALSE}
 source("gp_tabS4source.R")
 delay_fits = left_join(ds_fits,ds12_fits,by = "subjid")
 allfits = merge(delay_fits,risk_fits, by='subjid')
@@ -137,4 +131,7 @@ resmbmftX = table4(mbmftX)
 resmbmftX
 #resmbmftX$P<0.05
 ```
+
+## Table S6, between-subject correlation
+
 
