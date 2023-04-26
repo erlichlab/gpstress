@@ -4,7 +4,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 library(dplyr)
 library(Hmisc)
 ```
@@ -13,7 +13,7 @@ library(Hmisc)
 
 This is a master script for the main figures and tables in R.
 
-```{r gpstress}
+```{r gpstress, include=FALSE}
 # load decision-making trial data
 load('../../data/gpstress_all_trials.RData')
 # load fits and stress data
