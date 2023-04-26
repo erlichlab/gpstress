@@ -113,25 +113,44 @@ table2(dfjstr,2:3)
 ## Table S5, within-subject correlation
 
 ```{r tables5, echo=FALSE}
-source("gp_tabS4source.R")
+source("gp_tabS56source.R")
 delay_fits = left_join(ds_fits,ds12_fits,by = "subjid")
-allfits = merge(delay_fits,risk_fits, by='subjid')
+dw_fits$K_D = dw_fits$K_L
+dw_fitsX = subset(dw_fits, select = c(K_D, subjid) )
+allfits = merge(delay_fits,dw_fitsX, by='subjid')
 mbmf = merge(allfits,mf, by='subjid')
 mbmfstr = merge(mbmf, dfjstr, by = "subjid")
 mbmfstr$K_S21 = mbmfstr$K_S.y-mbmfstr$K_S.x
 mbmfstr$PL_S21 = mbmfstr$PL_S2-mbmfstr$PL_S1
-mbmft = dplyr::select(mbmfstr,c(K_S21, PL_S21,K_S, PL_S, tau, ls1,ls2,ls3,lds2,lds3,lds32,lfs2,lfs3,lfs32,lh1,lh2,lh3,ldh2,ldh3,ldh32,lfh2,lfh3,lfh32,pss,bepsi,lcu,ms,ts,PC1,PC2,PC3,PC4))
+mbmfstr$K_L21 = mbmfstr$K_L.y-mbmfstr$K_L.x
+mbmfstr$PL_L21 = mbmfstr$PL_L2-mbmfstr$PL_L1
+mbmfstr$K_L31 = mbmfstr$K_D-mbmfstr$K_L.x
+mbmfstr$PL_L31 = mbmfstr$PL_D-mbmfstr$PL_L1
+mbmfstr$K_L32 = mbmfstr$K_D-mbmfstr$K_L.y
+mbmfstr$PL_L32 = mbmfstr$PL_D-mbmfstr$PL_L2
+mbmft = dplyr::select(mbmfstr,c(K_S21, PL_S21, K_L21, PL_L21, K_L31, PL_L31, K_L32, PL_L32, lds2,lds3,lds32,ldh2,ldh3,ldh32))
 # with outlier
 resmbmft = table4(mbmft)
 resmbmft
 #resmbmft$P<0.05
-# without outlier
-mbmftX = mbmft[mbmft$tau<6,]
-resmbmftX = table4(mbmftX)
-resmbmftX
-#resmbmftX$P<0.05
 ```
 
 ## Table S6, between-subject correlation
+
+```{r tables6, echo=FALSE}
+source("gp_tabS56source.R")
+delay_fits = left_join(ds_fits,ds12_fits,by = "subjid")
+dw_fits$K_D = dw_fits$K_L
+dw_fitsX = subset(dw_fits, select = c(K_D, subjid) )
+allfits = merge(delay_fits,dw_fitsX, by='subjid')
+mbmf = merge(allfits,mf, by='subjid')
+mbmfstr = merge(mbmf, dfjstr, by = "subjid")
+mbmftb = dplyr::select(mbmfstr,c(K_S.x, PL_S1, K_S.y, PL_S2, K_L.x, K_L.y, K_D, PL_L1, PL_L2, PL_D, ls1,ls2,ls3,lh1,lh2,lh3,pss,bepsi,lcu,PC1,PC2,PC3,PC4))
+# with outlier
+resmbmftb = table4(mbmftb)
+resmbmftb
+#resmbmft$P<0.05
+```
+
 
 
