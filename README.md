@@ -1,7 +1,8 @@
 # gpstress
 
 Our study on impacts of stress on decision making.
-Current title: Willingness to wait covaries with endogenous variation in cortisol
+
+Current title: **Willingness to wait covaries with endogenous variation in cortisol**
 
 To cite the preprint: 
 
