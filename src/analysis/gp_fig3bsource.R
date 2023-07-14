@@ -13,10 +13,10 @@ fig3b = function(data){
   #df = data
   Mc <- cor(df)
   resc <- cor.mtest(df, conf.level = .95)
-  #pdf(file = "../../figs/fig3b.pdf")
+  #pdf(file = "../../figs/fig3b_a.pdf")
   p = corrplot(Mc, method = "color", type = "upper", p.mat = resc$p, 
-               sig.level = 0.05, col = brewer.pal(n=10, name = "PuOr"), tl.col = "purple", 
-               tl.cex = 1.8, cl.cex = 1.4) 
+               sig.level = 0.05, col = COL2('PuOr'), tl.col = "purple", 
+               tl.cex = 1.8, cl.cex = 1.4, diag = FALSE) 
   #dev.off()
   return(p)
 }
