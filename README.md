@@ -6,7 +6,7 @@ Current title: **Willingness to wait covaries with endogenous variation in corti
 
 To cite the preprint: 
 
-Willingness to wait covaries with endogenous variation in cortisol
+Willingness to wait covaries with endogenous variation in cortisol     
 Evgeniya Lukinova, Jeffrey C Erlich
 bioRxiv 2021.09.18.460891; doi: https://doi.org/10.1101/2021.09.18.460891
 
