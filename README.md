@@ -8,8 +8,8 @@ To cite the preprint:
 
 Willingness to wait covaries with endogenous variation in cortisol     
 Evgeniya Lukinova, Jeffrey C Erlich      
-bioRxiv 2021.09.18.460891; 
-doi: [https://doi.org/10.1101/2021.09.18.460891](https://doi.org/10.1101/2021.09.18.460891)
+bioRxiv 2021.09.18.460891;     
+[![DOI](https://doi.org/10.1101/2021.09.18.460891)](https://doi.org/10.1101/2021.09.18.460891)
 
 [![DOI](https://zenodo.org/badge/385504346.svg)](https://zenodo.org/badge/latestdoi/385504346)
 
